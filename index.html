@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light">
+<meta name="robots" content="noindex, nofollow">
+<title>Cirrus Feedback</title>
+<link rel="icon" href="/feedback/icons/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="/feedback/icons/favicon-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/feedback/icons/favicon-16.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/feedback/icons/apple-touch-icon.png">
+<!--og-->
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Cirrus">
+<meta property="og:title" content="Cirrus Feedback">
+<meta property="og:description" content="Try what is new in Cirrus and tell us what you think.">
+<meta property="og:image" content="https://cirrus-assessment.github.io/feedback/cards/default.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:url" content="https://cirrus-assessment.github.io/feedback/">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Cirrus Feedback">
+<meta name="twitter:description" content="Try what is new in Cirrus and tell us what you think.">
+<meta name="twitter:image" content="https://cirrus-assessment.github.io/feedback/cards/default.png">
+<!--/og-->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --cream:#F4F4F0;--paper:#FFFFFF;--aubergine:#464361;--ink:#2E2C40;--muted:#6B6980;
+  --line:#E3E2DA;--line2:#D3D1C8;--orange:#E76A25;--orange-dk:#CF5A18;--focus:rgba(231,106,37,0.28);
+  --radius:12px;--shadow:0 1px 2px rgba(46,44,64,0.04),0 6px 20px rgba(46,44,64,0.06);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{-webkit-text-size-adjust:100%;}
+body{font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:var(--cream);color:var(--ink);
+  -webkit-font-smoothing:antialiased;line-height:1.6;font-size:16px;}
+a{color:var(--orange-dk);text-underline-offset:2px;}
+.wrap{max-width:720px;margin:0 auto;padding:28px 16px 64px;}
+.brand{display:block;width:104px;height:auto;margin-bottom:40px;}
+.brand .a{fill:var(--aubergine);}.brand .o{fill:var(--orange);}
+.eyebrow{display:flex;align-items:center;gap:10px;font-weight:600;font-size:15px;color:var(--aubergine);margin-bottom:10px;}
+.eyebrow::before{content:'';width:8px;height:8px;border-radius:50%;background:var(--orange);flex-shrink:0;}
+h1{font-family:'Poppins','Inter',sans-serif;font-weight:600;font-size:38px;line-height:1.15;letter-spacing:-0.8px;color:var(--aubergine);}
+.video{margin:28px 0 8px;border-radius:var(--radius);overflow:hidden;background:#E9E8E1;box-shadow:var(--shadow);aspect-ratio:16/9;}
+.video video{display:block;width:100%;height:100%;object-fit:cover;background:#E9E8E1;}
+section.block{margin-top:32px;}
+h2{font-family:'Poppins','Inter',sans-serif;font-weight:600;font-size:21px;line-height:1.3;color:var(--aubergine);margin-bottom:10px;letter-spacing:-0.3px;}
+.changes{list-style:none;}
+.changes li{position:relative;padding:0 0 10px 20px;}
+.changes li::before{content:'';position:absolute;left:2px;top:10px;width:6px;height:6px;border-radius:50%;background:var(--aubergine);opacity:0.55;}
+strong{font-weight:600;color:var(--aubergine);}
+.kb{display:inline-flex;align-items:center;gap:6px;margin-top:12px;font-weight:500;}
+.kb svg{width:15px;height:15px;}
+.card{margin-top:40px;background:var(--paper);border:1px solid var(--line);border-radius:var(--radius);padding:28px;box-shadow:var(--shadow);}
+.card h2{font-size:23px;margin-bottom:4px;}
+.card .lead{color:var(--muted);font-size:15px;margin-bottom:22px;}
+.q{margin-top:24px;border:0;}
+#qRating{margin-top:0;}
+.q label.t,.q legend{display:block;font-weight:600;font-size:15.5px;color:var(--ink);margin-bottom:8px;}
+.opt{font-weight:400;color:var(--muted);font-size:14px;margin-left:4px;}
+.rating{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;}
+.rating input{position:absolute;opacity:0;pointer-events:none;}
+.rating label{display:flex;align-items:center;justify-content:center;height:48px;border:1px solid var(--line2);border-radius:10px;
+  font-weight:600;font-size:17px;color:var(--aubergine);background:var(--paper);cursor:pointer;transition:border-color .15s,background .15s,color .15s;user-select:none;}
+.rating label:hover{border-color:var(--aubergine);}
+.rating input:checked+label{background:var(--aubergine);border-color:var(--aubergine);color:#fff;}
+.rating input:focus-visible+label{box-shadow:0 0 0 3px var(--focus);}
+.scale{display:flex;justify-content:space-between;margin-top:6px;font-size:13px;color:var(--muted);}
+textarea,input[type=text],input[type=email]{width:100%;font:inherit;font-size:16px;color:var(--ink);background:var(--paper);
+  border:1px solid var(--line2);border-radius:10px;padding:11px 13px;transition:border-color .15s,box-shadow .15s;}
+textarea{min-height:104px;resize:vertical;line-height:1.5;}
+textarea:focus,input:focus{outline:none;border-color:var(--orange);box-shadow:0 0 0 3px var(--focus);}
+.count{text-align:right;font-size:12px;color:var(--muted);margin-top:4px;min-height:16px;}
+.row2{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
+.notyou{margin-top:24px;font-size:14px;color:var(--muted);}
+.notyou button{appearance:none;border:0;background:none;padding:0;font:inherit;color:var(--orange-dk);text-decoration:underline;text-underline-offset:2px;cursor:pointer;}
+.hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden;}
+.actions{margin-top:28px;display:flex;flex-direction:column;gap:12px;}
+button.send{appearance:none;border:0;border-radius:10px;background:var(--orange);color:#fff;font:inherit;font-weight:600;font-size:16px;
+  height:50px;padding:0 24px;cursor:pointer;transition:background .15s;align-self:flex-start;min-width:200px;}
+button.send:hover{background:var(--orange-dk);}
+button.send:disabled{opacity:0.6;cursor:default;}
+button.send:focus-visible{outline:none;box-shadow:0 0 0 3px var(--focus);}
+.note{font-size:13.5px;color:var(--muted);line-height:1.55;}
+.err{display:none;margin-top:4px;color:#B4410E;font-size:14px;}
+.err.on{display:block;}
+.q.invalid .rating label,.q.invalid textarea{border-color:#D9773F;}
+.thanks{text-align:left;}
+.thanks .tick{width:44px;height:44px;border-radius:50%;background:var(--aubergine);display:flex;align-items:center;justify-content:center;margin-bottom:16px;}
+.thanks .tick svg{width:22px;height:22px;stroke:#fff;}
+.thanks p{margin-top:8px;}
+.gone{text-align:left;padding-top:20px;}
+.gone p{margin-top:10px;color:var(--muted);}
+footer{margin-top:48px;font-size:13px;color:var(--muted);}
+[hidden]{display:none !important;}
+@media (max-width:560px){
+  .wrap{padding:20px 16px 48px;}
+  .brand{width:88px;margin-bottom:28px;}
+  h1{font-size:29px;letter-spacing:-0.5px;}
+  .card{padding:20px 16px;margin-left:-4px;margin-right:-4px;}
+  .row2{grid-template-columns:1fr;}
+  button.send{align-self:stretch;}
+  .rating{gap:6px;}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <svg class="brand" viewBox="0 0 447.83 91.8" role="img" aria-label="Cirrus"><rect class="a" x="101.34" y="1.8" width="19.98" height="88.02"/><path class="a" d="M196.19,2l-2.34,19.44a26.92,26.92,0,0,0-10.8-2.16c-9.71,0-20.51,8.1-20.51,23.58v47h-20V1.8h20V14.4C166.5,5.94,176.4,0,185,0A28.16,28.16,0,0,1,196.19,2Z"/><path class="a" d="M263.87,2l-2.34,19.44a26.92,26.92,0,0,0-10.8-2.16c-9.72,0-20.52,8.1-20.52,23.58v47h-20V1.8h20V14.4c4-8.46,13.86-14.4,22.5-14.4A28.16,28.16,0,0,1,263.87,2Z"/><path class="a" d="M359.81,1.8v88H339.65V76c-5.58,9.9-14.76,15.66-26.46,15.66-22.67,0-36.53-15.12-36.53-39.78V1.8h20V49.5c0,13.86,8.46,22.86,21.42,22.86s21.6-9,21.6-22.86V1.8Z"/><path class="a" d="M375.29,79l7.92-15.12c6.84,6.48,19.8,11,29.7,11,8.82,0,14.58-4.14,14.58-9.72,0-16.2-49-4.86-49-37.44,0-16.38,14-27.72,34.2-27.72,12.24,0,25,3.42,32.94,10.62L437.75,26.1c-7-6.12-19.62-9.36-27-9.36s-12.24,3.6-12.24,9.36c0,14.94,49.32,5.76,49.32,38.34,0,15.84-14.22,27.36-34.38,27.36C399.23,91.8,383.93,86.76,375.29,79Z"/><path class="a" d="M45.76,19.26h.14c9.54,0,17.46,4.68,21.06,11.7l16.92-9.54C77.4,8.46,63,0,45.9,0h-.14Z"/><path class="a" d="M68.76,59.4c-4,8.1-12.42,13-22.68,13C31,72.36,19.8,60.84,19.8,45.9v-.09H0v.09C0,72,20,91.62,46.08,91.62c18.36,0,33.84-9.54,40.5-24.12Z"/><path class="o" d="M32.36,19.08,27,25.41l-5,6-.54.65-.68-.57L18,29.11l-5.82-4.88L5.94,19l-.63-.52.53-.65,2.75-3.27,1.55-1.86c.18-.2.55-.65.55-.65s.47.36.68.54L14.18,15l6.23,5.22,1-1.17c1.72-2.05,3.44-4.09,5.15-6.14l5.73-6.82L37.36,0H9.65A9.65,9.65,0,0,0,0,9.65V37.36H27.81l9.55,8V13.12C35.69,15.11,34,17.09,32.36,19.08Z"/></svg>
+
+  <main id="app" hidden>
+    <div class="eyebrow" id="eyebrow">New on RC</div>
+    <h1 id="title"></h1>
+
+    <div class="video" id="videoBox" hidden>
+      <video id="video" controls playsinline preload="metadata"></video>
+    </div>
+
+    <section class="block" id="changedBlock" hidden>
+      <h2>What has changed</h2>
+      <ul class="changes" id="changed"></ul>
+    </section>
+
+    <section class="block" id="whereBlock" hidden>
+      <h2>Where to find it</h2>
+      <p id="where"></p>
+      <a class="kb" id="kb" target="_blank" rel="noopener" hidden>Read the article
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M8 7h9v9"/></svg></a>
+    </section>
+
+    <form class="card" id="form" novalidate>
+      <h2>Tell us what you think</h2>
+      <p class="lead">3 short questions. It takes about 2 minutes.</p>
+
+      <fieldset class="q" id="qRating">
+        <legend>How well does this work for you?</legend>
+        <div class="rating" role="radiogroup">
+          <input type="radio" name="rating" id="r1" value="1"><label for="r1">1</label>
+          <input type="radio" name="rating" id="r2" value="2"><label for="r2">2</label>
+          <input type="radio" name="rating" id="r3" value="3"><label for="r3">3</label>
+          <input type="radio" name="rating" id="r4" value="4"><label for="r4">4</label>
+          <input type="radio" name="rating" id="r5" value="5"><label for="r5">5</label>
+        </div>
+        <div class="scale"><span>Not well</span><span>Very well</span></div>
+        <p class="err" id="eRating">Please choose a rating.</p>
+      </fieldset>
+
+      <div class="q" id="qWorked">
+        <label class="t" for="worked">What worked well?</label>
+        <textarea id="worked" name="worked" maxlength="2000"></textarea>
+        <div class="count" data-for="worked"></div>
+        <p class="err" id="eWorked">Please add a few words.</p>
+      </div>
+
+      <div class="q" id="qChange">
+        <label class="t" for="change">What would you change?</label>
+        <textarea id="change" name="change" maxlength="2000"></textarea>
+        <div class="count" data-for="change"></div>
+        <p class="err" id="eChange">Please add a few words.</p>
+      </div>
+
+      <div class="q">
+        <label class="t" for="unexpected">Did anything not work as you expected?<span class="opt">Optional</span></label>
+        <textarea id="unexpected" name="unexpected" maxlength="2000"></textarea>
+        <div class="count" data-for="unexpected"></div>
+      </div>
+
+      <p class="notyou" id="notYou" hidden>Not the person this link was sent to? <button type="button" id="addName">Add your name</button></p>
+
+      <div class="q row2" id="who">
+        <div>
+          <label class="t" for="name">Your name<span class="opt">Optional</span></label>
+          <input type="text" id="name" name="name" maxlength="120" autocomplete="name">
+        </div>
+        <div>
+          <label class="t" for="email">Email<span class="opt">Optional</span></label>
+          <input type="email" id="email" name="email" maxlength="200" autocomplete="email">
+          <p class="err" id="eEmail">Please check this email address.</p>
+        </div>
+      </div>
+
+      <div class="hp" aria-hidden="true">
+        <label for="website">Website</label>
+        <input type="text" id="website" name="website" tabindex="-1" autocomplete="off">
+      </div>
+
+      <div class="actions">
+        <button type="submit" class="send" id="send">Send feedback</button>
+        <p class="err" id="eSend"></p>
+        <p class="note">Cirrus keeps your answers, and your name and email if you add them, for 2 years. Only the Cirrus team reads them, to improve the product.</p>
+      </div>
+    </form>
+
+    <div class="card thanks" id="thanks" hidden>
+      <div class="tick"><svg viewBox="0 0 24 24" fill="none" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></div>
+      <h2>Thank you</h2>
+      <p>Your feedback has reached the Cirrus team.</p>
+      <p class="note">Cirrus keeps your answers, and your name and email if you added them, for 2 years. Only the Cirrus team reads them, to improve the product.</p>
+    </div>
+  </main>
+
+  <div class="gone" id="gone" hidden>
+    <h1>Cirrus Feedback</h1>
+    <p>This link is not complete. Please use the link from the email you received.</p>
+  </div>
+
+  <footer>Cirrus Assessment, Utrecht</footer>
+</div>
+
+<iframe name="fallbackFrame" id="fallbackFrame" title="" hidden></iframe>
+
+<script>
+(function () {
+  var INTAKE = 'https://script.google.com/macros/s/AKfycbwDQZ2_CAblU1-B-WTlSv_AGuovbhXAwRhYRNgNOJ5ihdbNjF6PIIHtxQNKJOmWfQHQ/exec';
+
+  var params = new URLSearchParams(location.search);
+  var pathSlug = (location.pathname.match(/\/feedback\/([a-z0-9-]+)\/?$/) || [])[1];
+  var F = params.get('f') || pathSlug || document.documentElement.getAttribute('data-feature') || '';
+  var C = (params.get('c') || '').toLowerCase();
+  var T = params.get('t') || '';
+  var feature = null;
+  var draftKey = 'cirrus-feedback:' + F + ':' + (T || C);
+  var $ = function (id) { return document.getElementById(id); };
+
+  function esc(s) {
+    return String(s == null ? '' : s).replace(/[&<>"']/g, function (ch) {
+      return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[ch];
+    });
+  }
+  function md(s) { return esc(s).replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>'); }
+
+  function store(fn) { try { return fn(); } catch (e) { return null; } }
+
+  fetch('features.json', { cache: 'no-cache' }).then(function (r) { return r.json(); })
+    .then(function (all) {
+      feature = Object.prototype.hasOwnProperty.call(all, F) ? all[F] : null;
+      if (!feature || !(T || C)) { $('gone').hidden = false; return; }
+      render();
+    })
+    .catch(function () { $('gone').hidden = false; });
+
+  function render() {
+    var f = feature;
+    document.title = f.title + ' | Cirrus Feedback';
+    $('eyebrow').textContent = f.status === 'released' ? 'New in Cirrus' : 'New on RC';
+    $('title').textContent = f.title;
+
+    if (f.video && f.video.mp4) {
+      var v = $('video');
+      if (f.video.poster) v.poster = f.video.poster;
+      var src = document.createElement('source');
+      src.src = f.video.mp4; src.type = 'video/mp4';
+      v.appendChild(src);
+      $('videoBox').hidden = false;
+    }
+    if (f.changed && f.changed.length) {
+      $('changed').innerHTML = f.changed.map(function (c) { return '<li>' + md(c) + '</li>'; }).join('');
+      $('changedBlock').hidden = false;
+    }
+    if (f.where || f.kb) {
+      var where = f.status === 'released' ? 'In Cirrus: ' : 'In your RC environment: ';
+      if (f.where) $('where').innerHTML = esc(where) + md(f.where);
+      if (f.kb) { $('kb').href = f.kb; $('kb').hidden = false; }
+      $('whereBlock').hidden = false;
+    }
+
+    /* A personal link already says who is answering; the fields stay
+       hidden unless someone else is using the link. */
+    if (T) {
+      $('who').hidden = true;
+      $('notYou').hidden = false;
+      document.querySelectorAll('.note').forEach(function (n) {
+        n.textContent = 'Cirrus keeps your answers, with the name and email this link was sent to, for 2 years. Only the Cirrus team reads them, to improve the product.';
+      });
+    }
+
+    restoreDraft();
+    $('app').hidden = false;
+  }
+
+  /* ---- draft ---- */
+  var fields = ['worked', 'change', 'unexpected', 'name', 'email'];
+  $('addName').addEventListener('click', function () {
+    $('notYou').hidden = true; $('who').hidden = false; $('name').focus();
+  });
+  function saveDraft() {
+    var d = { rating: (document.querySelector('input[name=rating]:checked') || {}).value || '' };
+    fields.forEach(function (k) { d[k] = $(k).value; });
+    store(function () { localStorage.setItem(draftKey, JSON.stringify(d)); });
+  }
+  function restoreDraft() {
+    var raw = store(function () { return localStorage.getItem(draftKey); });
+    if (!raw) return;
+    var d = store(function () { return JSON.parse(raw); }) || {};
+    fields.forEach(function (k) { if (d[k]) $(k).value = d[k]; });
+    if (d.rating && $('r' + d.rating)) $('r' + d.rating).checked = true;
+    if (T && (d.name || d.email)) { $('notYou').hidden = true; $('who').hidden = false; }
+    fields.forEach(updateCount);
+  }
+  function updateCount(k) {
+    var el = document.querySelector('.count[data-for="' + k + '"]');
+    if (!el) return;
+    var n = $(k).value.length;
+    el.textContent = n > 1600 ? n + ' of 2,000' : '';
+  }
+  $('form').addEventListener('input', function (e) {
+    if (e.target.id) updateCount(e.target.id);
+    clearErr(e.target);
+    saveDraft();
+  });
+  $('form').addEventListener('change', function (e) { clearErr(e.target); saveDraft(); });
+
+  function clearErr(t) {
+    var q = t.closest('.q'); if (q) q.classList.remove('invalid');
+    if (t.name === 'rating') $('eRating').classList.remove('on');
+    if (t.id === 'worked') $('eWorked').classList.remove('on');
+    if (t.id === 'change') $('eChange').classList.remove('on');
+    if (t.id === 'email') $('eEmail').classList.remove('on');
+  }
+
+  /* ---- submit ---- */
+  $('form').addEventListener('submit', function (e) {
+    e.preventDefault();
+    var rating = (document.querySelector('input[name=rating]:checked') || {}).value;
+    var b = {
+      f: F, c: C, t: T, rating: Number(rating || 0),
+      worked: $('worked').value.trim(), change: $('change').value.trim(), unexpected: $('unexpected').value.trim(),
+      name: $('name').value.trim(), email: $('email').value.trim(), website: $('website').value,
+      ua: navigator.userAgent
+    };
+    var first = null;
+    function bad(qId, errId) { $(errId).classList.add('on'); if (qId) $(qId).classList.add('invalid'); first = first || $(errId); }
+    if (!rating) bad('qRating', 'eRating');
+    if (!b.worked) bad('qWorked', 'eWorked');
+    if (!b.change) bad('qChange', 'eChange');
+    if (b.email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(b.email)) bad(null, 'eEmail');
+    if (first) { first.closest('.q').scrollIntoView({ behavior: 'smooth', block: 'center' }); return; }
+
+    $('send').disabled = true; $('send').textContent = 'Sending...';
+    $('eSend').classList.remove('on');
+
+    fetch(INTAKE, { method: 'POST', headers: { 'Content-Type': 'text/plain;charset=utf-8' }, body: JSON.stringify(b) })
+      .then(function (r) { return r.json(); })
+      .then(function (res) {
+        if (res && res.ok) return done();
+        fail(res && res.error);
+      })
+      .catch(function () { fallback(b); });
+  });
+
+  var MESSAGES = {
+    rate_limited: 'We have received a lot of feedback through this link in the last hour. Please try again later.',
+    too_long: 'One of your answers is too long. Please shorten it to 2,000 characters.',
+    email: 'Please check your email address.',
+    unknown_client: 'This link is not complete. Please use the link from the email you received.',
+    token: 'This link is no longer valid. Please ask Cirrus for a new one.'
+  };
+  function fail(code) {
+    $('send').disabled = false; $('send').textContent = 'Send feedback';
+    $('eSend').textContent = MESSAGES[code] || 'Your feedback could not be sent. Please try again in a minute.';
+    $('eSend').classList.add('on');
+  }
+
+  /* Some networks block reading the response from script.google.com. Post the
+     same JSON through a hidden form; the response is not readable, so the
+     page shows the thank-you state once the frame has loaded. */
+  function fallback(b) {
+    var form = document.createElement('form');
+    form.method = 'POST'; form.action = INTAKE; form.target = 'fallbackFrame'; form.hidden = true;
+    var input = document.createElement('input');
+    input.type = 'hidden'; input.name = 'payload'; input.value = JSON.stringify(b);
+    form.appendChild(input);
+    document.body.appendChild(form);
+    var timer = setTimeout(function () { fail(); }, 20000);
+    $('fallbackFrame').onload = function () { clearTimeout(timer); done(); };
+    form.submit();
+  }
+
+  function done() {
+    store(function () { localStorage.removeItem(draftKey); });
+    $('form').hidden = true;
+    $('thanks').hidden = false;
+    $('thanks').scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+})();
+</script>
+</body>
+</html>

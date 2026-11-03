@@ -1,0 +1,22 @@
+{
+  "schedule-candidates": {
+    "title": "Adding candidates to a schedule",
+    "kind": "improvement",
+    "cr": "CR-25983",
+    "status": "rc",
+    "kb": "https://help.cirrusassessment.com/rc-environment/docs/adding-candidates-to-a-schedule",
+    "video": {
+      "mp4": "https://cdn.document360.io/cdfc20c8-6721-4154-b0a1-9f49f139d107/Images/Documentation/new-on-rc-adding-candidates-to-a-schedule-v2.mp4",
+      "poster": "https://cdn.document360.io/cdfc20c8-6721-4154-b0a1-9f49f139d107/Images/Documentation/new-on-rc-adding-candidates-to-a-schedule-cover.jpg"
+    },
+    "changed": [
+      "**Selections are kept** when you search or filter again. The footer shows how many candidates you have selected.",
+      "**Filter by hierarchy, role or label** in the selection window.",
+      "**The selection window stays open after Add.** A confirmation shows how many candidates were added, so you can add the next batch straight away. Click Close when you are done.",
+      "**Search and filter the candidates on a schedule** from the Candidates tab. The Filter button shows how many filters are on."
+    ],
+    "where": "**Delivering > [schedule title] > Candidates**, then click **Add candidates** to open the selection window.",
+    "opened": "2026-11-03",
+    "summary": "A new selection window for adding candidates to a schedule."
+  }
+}
