@@ -79,6 +79,28 @@ textarea:focus,input:focus{outline:none;border-color:var(--orange);box-shadow:0 
 .row2{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
 .notyou{margin-top:24px;font-size:14px;color:var(--muted);}
 .notyou button{appearance:none;border:0;background:none;padding:0;font:inherit;color:var(--orange-dk);text-decoration:underline;text-underline-offset:2px;cursor:pointer;}
+.showus .hint{color:var(--muted);font-size:14px;margin:-4px 0 12px;}
+.mactions{display:flex;flex-wrap:wrap;gap:8px;}
+.mbtn{display:inline-flex;align-items:center;gap:8px;height:42px;padding:0 14px;border:1px solid var(--line2);border-radius:10px;background:var(--paper);
+  color:var(--aubergine);font:inherit;font-size:15px;font-weight:500;cursor:pointer;transition:border-color .15s;}
+.mbtn:hover{border-color:var(--aubergine);}
+.mbtn:focus-visible{outline:none;box-shadow:0 0 0 3px var(--focus);}
+.mbtn svg{width:18px;height:18px;flex-shrink:0;}
+.mic{display:flex;align-items:center;gap:8px;margin-top:10px;font-size:14px;color:var(--muted);}
+.recbar{display:flex;align-items:center;gap:12px;margin-top:12px;padding:10px 14px;border-radius:10px;background:#F7F6F1;border:1px solid var(--line);}
+.recbar .dot{width:10px;height:10px;border-radius:50%;background:var(--orange);animation:pulse 1.2s infinite;}
+@keyframes pulse{50%{opacity:.35}}
+.recbar .lbl{font-weight:500;flex:1;}
+.recbar .time{font-variant-numeric:tabular-nums;color:var(--muted);font-size:14px;}
+.recbar button{appearance:none;border:0;border-radius:8px;background:var(--aubergine);color:#fff;font:inherit;font-size:14px;font-weight:600;height:34px;padding:0 14px;cursor:pointer;}
+.attach{list-style:none;margin-top:12px;display:flex;flex-direction:column;gap:10px;}
+.attach li{border:1px solid var(--line);border-radius:10px;padding:12px;background:#FBFBF8;}
+.attach audio,.attach video{display:block;width:100%;margin-bottom:8px;}
+.attach video{max-height:260px;background:#000;border-radius:6px;}
+.attach img{display:block;max-width:100%;max-height:220px;border-radius:6px;margin-bottom:8px;}
+.attach .meta{display:flex;align-items:center;gap:12px;flex-wrap:wrap;font-size:14px;color:var(--muted);}
+.attach .meta b{font-weight:600;color:var(--ink);}
+.attach .meta button{appearance:none;border:0;background:none;padding:0;font:inherit;font-size:14px;color:var(--orange-dk);text-decoration:underline;text-underline-offset:2px;cursor:pointer;}
 .hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden;}
 .actions{margin-top:28px;display:flex;flex-direction:column;gap:12px;}
 button.send{appearance:none;border:0;border-radius:10px;background:var(--orange);color:#fff;font:inherit;font-weight:600;font-size:16px;
@@ -171,6 +193,21 @@ footer{margin-top:48px;font-size:13px;color:var(--muted);}
         <div class="count" data-for="unexpected"></div>
       </div>
 
+      <div class="q showus" id="qShow">
+        <label class="t">Show us<span class="opt">Optional</span></label>
+        <p class="hint">Speak, record your screen or upload.</p>
+        <div class="mactions">
+          <button type="button" class="mbtn" id="voiceBtn" hidden><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="2" width="6" height="12" rx="3"/><path d="M5 10v1a7 7 0 0 0 14 0v-1M12 18v4"/></svg>Record a voice note</button>
+          <button type="button" class="mbtn" id="screenBtn" hidden><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>Record your screen</button>
+          <label class="mbtn" for="fileIn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M17 8l-5-5-5 5M12 3v12"/></svg>Upload a file</label>
+          <input type="file" id="fileIn" multiple hidden accept="audio/*,video/mp4,video/webm,video/quicktime,.mov,.m4a,image/png,image/jpeg">
+        </div>
+        <label class="mic" id="micOpt" hidden><input type="checkbox" id="withMic"> Include my microphone in the screen recording</label>
+        <div class="recbar" id="recBar" hidden><span class="dot"></span><span class="lbl" id="recLabel"></span><span class="time" id="recTime"></span><button type="button" id="recStop">Stop</button></div>
+        <ul class="attach" id="attachList"></ul>
+        <p class="err" id="eFiles"></p>
+      </div>
+
       <p class="notyou" id="notYou" hidden>Not the person this link was sent to? <button type="button" id="addName">Add your name</button></p>
 
       <div class="q row2" id="who">
@@ -193,7 +230,7 @@ footer{margin-top:48px;font-size:13px;color:var(--muted);}
       <div class="actions">
         <button type="submit" class="send" id="send">Send feedback</button>
         <p class="err" id="eSend"></p>
-        <p class="note">Cirrus keeps your answers, and your name and email if you add them, for 2 years. Only the Cirrus team reads them, to improve the product.</p>
+        <p class="note">Cirrus keeps your answers, any recordings or files, and your name and email if you add them, for 2 years. Only the Cirrus team sees them, to improve the product.</p>
       </div>
     </form>
 
@@ -201,7 +238,7 @@ footer{margin-top:48px;font-size:13px;color:var(--muted);}
       <div class="tick"><svg viewBox="0 0 24 24" fill="none" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></div>
       <h2>Thank you</h2>
       <p>Your feedback has reached the Cirrus team.</p>
-      <p class="note">Cirrus keeps your answers, and your name and email if you added them, for 2 years. Only the Cirrus team reads them, to improve the product.</p>
+      <p class="note">Cirrus keeps your answers, any recordings or files, and your name and email if you added them, for 2 years. Only the Cirrus team sees them, to improve the product.</p>
     </div>
   </main>
 
@@ -210,7 +247,7 @@ footer{margin-top:48px;font-size:13px;color:var(--muted);}
     <p>This link is not complete. Please use the link from the email you received.</p>
   </div>
 
-  <footer>Cirrus Assessment, Utrecht</footer>
+  <footer>Cirrus Assessment</footer>
 </div>
 
 <iframe name="fallbackFrame" id="fallbackFrame" title="" hidden></iframe>
@@ -285,7 +322,7 @@ footer{margin-top:48px;font-size:13px;color:var(--muted);}
       $('who').hidden = true;
       $('notYou').hidden = false;
       document.querySelectorAll('.note').forEach(function (n) {
-        n.textContent = 'Cirrus keeps your answers, with the name and email this link was sent to, for 2 years. Only the Cirrus team reads them, to improve the product.';
+        n.textContent = 'Cirrus keeps your answers and any recordings or files, with the name and email this link was sent to, for 2 years. Only the Cirrus team sees them, to improve the product.';
       });
     }
 
@@ -344,29 +381,201 @@ footer{margin-top:48px;font-size:13px;color:var(--muted);}
       ua: navigator.userAgent
     };
     var first = null;
-    function bad(qId, errId) { $(errId).classList.add('on'); if (qId) $(qId).classList.add('invalid'); first = first || $(errId); }
+    function bad(qId, errId, msg) { if (msg) $(errId).textContent = msg; $(errId).classList.add('on'); if (qId) $(qId).classList.add('invalid'); first = first || $(errId); }
     if (!rating) bad('qRating', 'eRating');
-    if (!b.worked) bad('qWorked', 'eWorked');
-    if (!b.change) bad('qChange', 'eChange');
+    if (!attachments.length && !b.worked) bad('qWorked', 'eWorked');
+    if (!attachments.length && !b.change) bad('qChange', 'eChange');
+    if (recording) bad('qShow', 'eFiles', 'Please stop the recording first.');
     if (b.email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(b.email)) bad(null, 'eEmail');
     if (first) { first.closest('.q').scrollIntoView({ behavior: 'smooth', block: 'center' }); return; }
 
-    $('send').disabled = true; $('send').textContent = 'Sending...';
+    $('send').disabled = true;
+    $('send').textContent = attachments.length ? 'Uploading ' + mb(totalBytes()) + '...' : 'Sending...';
     $('eSend').classList.remove('on');
 
-    fetch(INTAKE, { method: 'POST', headers: { 'Content-Type': 'text/plain;charset=utf-8' }, body: JSON.stringify(b) })
-      .then(function (r) { return r.json(); })
-      .then(function (res) {
-        if (res && res.ok) return done();
-        fail(res && res.error);
-      })
-      .catch(function () { fallback(b); });
+    encodeAll().then(function (files) {
+      if (files.length) b.files = files;
+      return fetch(INTAKE, { method: 'POST', headers: { 'Content-Type': 'text/plain;charset=utf-8' }, body: JSON.stringify(b) })
+        .then(function (r) { return r.json(); })
+        .then(function (res) {
+          if (res && res.ok) return done();
+          fail(res && res.error);
+        })
+        .catch(function () { fallback(b); });
+    }).catch(function () { fail(); });
   });
+
+  /* ---- show us: voice note, screen recording, uploads ---- */
+  var attachments = [];          // {kind, blob, mime, seconds, label}
+  var recording = null;          // {kind, recorder, streams, timer, started}
+  var MAX_TOTAL = 30 * 1024 * 1024, MAX_VOICE = 10 * 1024 * 1024, MAX_UPLOADS = 3, MAX_SECONDS = 180;
+  var UPLOAD_TYPES = ['audio/webm', 'audio/ogg', 'audio/mp4', 'audio/mpeg', 'audio/aac', 'audio/x-m4a', 'audio/wav', 'audio/x-wav',
+    'video/mp4', 'video/webm', 'video/quicktime', 'image/png', 'image/jpeg'];
+  var canRecord = !!(window.MediaRecorder && navigator.mediaDevices && navigator.mediaDevices.getUserMedia);
+  $('voiceBtn').hidden = !canRecord;
+  if (window.MediaRecorder && navigator.mediaDevices && navigator.mediaDevices.getDisplayMedia) {
+    $('screenBtn').hidden = false;
+    $('micOpt').hidden = false;
+  }
+
+  function mb(n) { return (n / 1048576).toFixed(n < 10485760 ? 1 : 0) + ' MB'; }
+  function clock(s) { s = Math.round(s); return Math.floor(s / 60) + ':' + ('0' + (s % 60)).slice(-2); }
+  function totalBytes() { return attachments.reduce(function (a, x) { return a + x.blob.size; }, 0); }
+  function baseType(t) { return String(t || '').split(';')[0].trim().toLowerCase(); }
+  function pick(list) { for (var i = 0; i < list.length; i++) if (MediaRecorder.isTypeSupported(list[i])) return list[i]; return ''; }
+  function fileErr(msg) { $('eFiles').textContent = msg; $('eFiles').classList.toggle('on', !!msg); }
+
+  function renderAttachments() {
+    var list = $('attachList');
+    list.innerHTML = '';
+    attachments.forEach(function (a, i) {
+      var li = document.createElement('li');
+      var url = a.url || (a.url = URL.createObjectURL(a.blob));
+      var type = baseType(a.mime).split('/')[0];
+      var el;
+      if (type === 'image') { el = document.createElement('img'); el.alt = a.label; }
+      else { el = document.createElement(type === 'video' ? 'video' : 'audio'); el.controls = true; el.preload = 'metadata'; el.setAttribute('playsinline', ''); }
+      el.src = url;
+      li.appendChild(el);
+      var meta = document.createElement('div');
+      meta.className = 'meta';
+      meta.innerHTML = '<b>' + esc(a.label) + '</b><span>' + (a.seconds ? clock(a.seconds) + ', ' : '') + mb(a.blob.size) + '</span>';
+      if (a.kind !== 'upload') {
+        var again = document.createElement('button');
+        again.type = 'button'; again.textContent = 'Record again';
+        again.onclick = function () { a.kind === 'voice' ? startVoice() : startScreen(); };
+        meta.appendChild(again);
+      }
+      var rm = document.createElement('button');
+      rm.type = 'button'; rm.textContent = 'Remove';
+      rm.onclick = function () { URL.revokeObjectURL(url); attachments.splice(i, 1); fileErr(''); renderAttachments(); };
+      meta.appendChild(rm);
+      li.appendChild(meta);
+      list.appendChild(li);
+    });
+    if (attachments.length) { $('eWorked').classList.remove('on'); $('eChange').classList.remove('on'); }
+  }
+
+  function setAttachment(a) {
+    attachments = attachments.filter(function (x) { return x.kind !== a.kind || a.kind === 'upload'; });
+    if (totalBytes() + a.blob.size > MAX_TOTAL) {
+      return fileErr('Recordings and files can add up to 30 MB. This one would make ' + mb(totalBytes() + a.blob.size) + '.');
+    }
+    attachments.push(a);
+    fileErr('');
+    renderAttachments();
+  }
+
+  function startRecording(kind, streams, mime, opts) {
+    var stream = new MediaStream();
+    streams.forEach(function (s) { s.getTracks().forEach(function (t) { stream.addTrack(t); }); });
+    var options = { mimeType: mime };
+    for (var k in opts) options[k] = opts[k];
+    if (!mime) delete options.mimeType;
+    var rec = new MediaRecorder(stream, options);
+    var chunks = [];
+    rec.ondataavailable = function (e) { if (e.data && e.data.size) chunks.push(e.data); };
+    recording = { kind: kind, recorder: rec, streams: streams, started: Date.now() };
+    rec.onstop = function () {
+      var r = recording; recording = null;
+      clearInterval(r.timer);
+      r.streams.forEach(function (s) { s.getTracks().forEach(function (t) { t.stop(); }); });
+      $('recBar').hidden = true;
+      var seconds = Math.min(MAX_SECONDS, (Date.now() - r.started) / 1000);
+      var type = baseType(rec.mimeType || mime) || (kind === 'voice' ? 'audio/webm' : 'video/webm');
+      var blob = new Blob(chunks, { type: type });
+      if (kind === 'voice' && blob.size > MAX_VOICE) return fileErr('This voice note is over 10 MB. Please record a shorter one.');
+      setAttachment({ kind: kind, blob: blob, mime: type, seconds: Math.round(seconds),
+        label: kind === 'voice' ? 'Voice note' : 'Screen recording' });
+    };
+    // The screen recording also stops when the browser's own Stop sharing is used.
+    stream.getVideoTracks().forEach(function (t) { t.onended = function () { if (rec.state === 'recording') rec.stop(); }; });
+    rec.start(1000);
+    $('recLabel').textContent = kind === 'voice' ? 'Recording a voice note' : 'Recording your screen';
+    $('recBar').hidden = false;
+    var tick = function () {
+      var s = (Date.now() - recording.started) / 1000;
+      $('recTime').textContent = clock(s) + ' of 3:00';
+      if (s >= MAX_SECONDS && rec.state === 'recording') rec.stop();
+    };
+    tick();
+    recording.timer = setInterval(tick, 250);
+  }
+
+  function startVoice() {
+    if (recording) return;
+    fileErr('');
+    navigator.mediaDevices.getUserMedia({ audio: true }).then(function (mic) {
+      startRecording('voice', [mic], pick(['audio/webm;codecs=opus', 'audio/mp4', 'audio/ogg;codecs=opus', 'audio/webm']), { audioBitsPerSecond: 64000 });
+    }).catch(function () { fileErr('The microphone could not be used. Check your browser allows it, or upload a recording.'); });
+  }
+
+  function startScreen() {
+    if (recording) return;
+    fileErr('');
+    navigator.mediaDevices.getDisplayMedia({ video: { frameRate: 15 }, audio: false }).then(function (screen) {
+      var withMic = $('withMic').checked
+        ? navigator.mediaDevices.getUserMedia({ audio: true }).catch(function () { return null; })
+        : Promise.resolve(null);
+      return withMic.then(function (mic) {
+        var streams = mic ? [screen, mic] : [screen];
+        var mime = pick(mic ? ['video/webm;codecs=vp9,opus', 'video/webm;codecs=vp8,opus', 'video/webm', 'video/mp4']
+          : ['video/webm;codecs=vp9', 'video/webm;codecs=vp8', 'video/webm', 'video/mp4']);
+        startRecording('screen', streams, mime, { videoBitsPerSecond: 1200000, audioBitsPerSecond: 64000 });
+      });
+    }).catch(function () { fileErr(''); });
+  }
+
+  $('voiceBtn').addEventListener('click', startVoice);
+  $('screenBtn').addEventListener('click', startScreen);
+  $('recStop').addEventListener('click', function () { if (recording && recording.recorder.state === 'recording') recording.recorder.stop(); });
+
+  $('fileIn').addEventListener('change', function () {
+    var picked = Array.prototype.slice.call(this.files || []);
+    this.value = '';
+    var uploads = attachments.filter(function (x) { return x.kind === 'upload'; }).length;
+    for (var i = 0; i < picked.length; i++) {
+      var f = picked[i];
+      var type = baseType(f.type) || (/\.mov$/i.test(f.name) ? 'video/quicktime' : /\.m4a$/i.test(f.name) ? 'audio/mp4' : '');
+      if (UPLOAD_TYPES.indexOf(type) < 0) { fileErr(f.name + ' is not a video, audio file or screenshot (PNG or JPG).'); continue; }
+      if (uploads >= MAX_UPLOADS) { fileErr('You can upload up to 3 files.'); break; }
+      if (totalBytes() + f.size > MAX_TOTAL) {
+        fileErr('Recordings and files can add up to 30 MB. ' + f.name + ' would make ' + mb(totalBytes() + f.size) + '.');
+        continue;
+      }
+      uploads++;
+      var a = { kind: 'upload', blob: f, mime: type, seconds: 0, label: f.name };
+      attachments.push(a);
+      if (type.indexOf('image/') !== 0) readDuration(a);
+    }
+    renderAttachments();
+  });
+
+  function readDuration(a) {
+    var el = document.createElement(a.mime.indexOf('video/') === 0 ? 'video' : 'audio');
+    el.preload = 'metadata';
+    el.onloadedmetadata = function () { if (isFinite(el.duration)) { a.seconds = Math.round(el.duration); renderAttachments(); } };
+    el.src = a.url || (a.url = URL.createObjectURL(a.blob));
+  }
+
+  function encodeAll() {
+    return Promise.all(attachments.map(function (a) {
+      return new Promise(function (resolve, reject) {
+        var r = new FileReader();
+        r.onload = function () { resolve({ kind: a.kind, mime: a.mime, seconds: a.seconds, data: String(r.result).split(',')[1] || '' }); };
+        r.onerror = reject;
+        r.readAsDataURL(a.blob);
+      });
+    }));
+  }
 
   var MESSAGES = {
     rate_limited: 'We have received a lot of feedback through this link in the last hour. Please try again later.',
     too_long: 'One of your answers is too long. Please shorten it to 2,000 characters.',
     email: 'Please check your email address.',
+    file_type: 'One of your files is not a supported recording or screenshot.',
+    file_size: 'Recordings and files can add up to 30 MB. Please remove one and try again.',
+    files: 'Please keep to 1 voice note, 1 screen recording and 3 uploaded files.',
     unknown_client: 'This link is not complete. Please use the link from the email you received.',
     token: 'This link is no longer valid. Please ask Cirrus for a new one.'
   };
@@ -386,7 +595,7 @@ footer{margin-top:48px;font-size:13px;color:var(--muted);}
     input.type = 'hidden'; input.name = 'payload'; input.value = JSON.stringify(b);
     form.appendChild(input);
     document.body.appendChild(form);
-    var timer = setTimeout(function () { fail(); }, 20000);
+    var timer = setTimeout(function () { fail(); }, b.files ? 180000 : 20000);
     $('fallbackFrame').onload = function () { clearTimeout(timer); done(); };
     form.submit();
   }
