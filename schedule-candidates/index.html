@@ -209,7 +209,7 @@ footer{margin-top:48px;font-size:13px;color:var(--muted);}
         <p class="err" id="eFiles"></p>
       </div>
 
-      <p class="notyou" id="notYou" hidden>Not the person this link was sent to? <button type="button" id="addName">Add your name</button></p>
+      <p class="notyou" id="notYou" hidden><span id="sentTo">Not the person this link was sent to?</span> <button type="button" id="addName">Add your name</button></p>
 
       <div class="q row2" id="who">
         <div>
@@ -262,6 +262,10 @@ footer{margin-top:48px;font-size:13px;color:var(--muted);}
   var F = params.get('f') || pathSlug || document.documentElement.getAttribute('data-feature') || '';
   var C = (params.get('c') || '').toLowerCase();
   var T = params.get('t') || '';
+  /* First name of the person a personal link was sent to: shown only, never
+     sent. Attribution comes from the token. */
+  var N = T ? (params.get('n') || '').trim().slice(0, 40) : '';
+  if (!/^[\p{L}\p{M}][\p{L}\p{M}'’.-]*$/u.test(N)) N = '';
   var feature = null;
   var draftKey = 'cirrus-feedback:' + F + ':' + (T || C);
   var $ = function (id) { return document.getElementById(id); };
@@ -322,6 +326,7 @@ footer{margin-top:48px;font-size:13px;color:var(--muted);}
     if (T) {
       $('who').hidden = true;
       $('notYou').hidden = false;
+      if (N) $('sentTo').textContent = 'This link was sent to ' + N + '. Not ' + N + '?';
       document.querySelectorAll('.note').forEach(function (n) {
         n.textContent = 'Cirrus keeps your answers and any recordings or files, with the name and email this link was sent to, for 2 years. Only the Cirrus team sees them, to improve the product.';
       });
