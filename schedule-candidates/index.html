@@ -108,6 +108,11 @@ button.send{appearance:none;border:0;border-radius:10px;background:var(--orange)
   height:50px;padding:0 24px;cursor:pointer;transition:background .15s;align-self:flex-start;min-width:200px;}
 button.send:hover{background:var(--orange-dk);}
 button.send:disabled{opacity:0.6;cursor:default;}
+button.send{position:relative;overflow:hidden;}
+button.send .lbl{position:relative;}
+button.send .fill{position:absolute;left:0;top:0;bottom:0;width:0;background:#B9500F;transition:width .25s linear;}
+button.send.busy:disabled{opacity:1;cursor:progress;background:var(--orange);}
+@media (prefers-reduced-motion:reduce){button.send .fill{transition:none;}}
 button.send:focus-visible{outline:none;box-shadow:0 0 0 3px var(--focus);}
 .note{font-size:13.5px;color:var(--muted);line-height:1.55;}
 .err{display:none;margin-top:4px;color:#B4410E;font-size:14px;}
@@ -229,7 +234,7 @@ footer{margin-top:48px;font-size:13px;color:var(--muted);}
       </div>
 
       <div class="actions">
-        <button type="submit" class="send" id="send">Send feedback</button>
+        <button type="submit" class="send" id="send"><span class="fill" id="sendFill"></span><span class="lbl" id="sendLbl">Send feedback</span></button>
         <p class="err" id="eSend"></p>
         <p class="note">Cirrus keeps your answers, any recordings or files, and your name and email if you add them, for 6 months, then deletes them. Only the Cirrus team sees them, to improve the product. To have them deleted sooner, contact the Cirrus Service Desk.</p>
       </div>
@@ -396,7 +401,7 @@ footer{margin-top:48px;font-size:13px;color:var(--muted);}
     if (first) { first.closest('.q').scrollIntoView({ behavior: 'smooth', block: 'center' }); return; }
 
     $('send').disabled = true;
-    $('send').textContent = attachments.length ? 'Uploading ' + mb(totalBytes()) + '...' : 'Sending...';
+    progress.start(attachments.length ? 'Uploading ' + mb(totalBytes()) + '...' : 'Sending...', totalBytes());
     $('eSend').classList.remove('on');
 
     encodeAll().then(function (files) {
@@ -586,7 +591,8 @@ footer{margin-top:48px;font-size:13px;color:var(--muted);}
     token: 'This link is no longer valid. Please ask Cirrus for a new one.'
   };
   function fail(code) {
-    $('send').disabled = false; $('send').textContent = 'Send feedback';
+    progress.stop();
+    $('send').disabled = false;
     $('eSend').textContent = MESSAGES[code] || 'Your feedback could not be sent. Please try again in a minute.';
     $('eSend').classList.add('on');
   }
@@ -606,7 +612,29 @@ footer{margin-top:48px;font-size:13px;color:var(--muted);}
     form.submit();
   }
 
+  /* The send button fills while the answer travels. The browser cannot
+     report upload progress to script.google.com without a preflight Apps
+     Script does not answer, so the fill follows an estimate from the size
+     (about 1 MB a second plus 2 seconds), slows towards 90% and completes
+     when the intake answers. */
+  var progress = {
+    start: function (label, bytes) {
+      var est = 2000 + (bytes * 1.37) / 1048576 * 1000, t0 = Date.now(), self = this;
+      $('sendLbl').textContent = label;
+      $('send').classList.add('busy');
+      this.set(0.04);
+      this.timer = setInterval(function () { self.set(0.04 + 0.86 * (1 - Math.exp(-2 * (Date.now() - t0) / est))); }, 150);
+    },
+    set: function (p) { $('sendFill').style.width = (p * 100).toFixed(1) + '%'; },
+    finish: function (then) { clearInterval(this.timer); this.set(1); setTimeout(then, 260); },
+    stop: function () { clearInterval(this.timer); this.set(0); $('send').classList.remove('busy'); $('sendLbl').textContent = 'Send feedback'; }
+  };
+
   function done() {
+    progress.finish(thanks);
+  }
+
+  function thanks() {
     store(function () { localStorage.removeItem(draftKey); });
     $('form').hidden = true;
     $('thanks').hidden = false;
