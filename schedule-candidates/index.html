@@ -231,7 +231,7 @@ footer{margin-top:48px;font-size:13px;color:var(--muted);}
       <div class="actions">
         <button type="submit" class="send" id="send">Send feedback</button>
         <p class="err" id="eSend"></p>
-        <p class="note">Cirrus keeps your answers, any recordings or files, and your name and email if you add them, for 2 years. Only the Cirrus team sees them, to improve the product.</p>
+        <p class="note">Cirrus keeps your answers, any recordings or files, and your name and email if you add them, for 6 months, then deletes them. Only the Cirrus team sees them, to improve the product. To have them deleted sooner, contact the Cirrus Service Desk.</p>
       </div>
     </form>
 
@@ -239,7 +239,7 @@ footer{margin-top:48px;font-size:13px;color:var(--muted);}
       <div class="tick"><svg viewBox="0 0 24 24" fill="none" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></div>
       <h2>Thank you</h2>
       <p>Your feedback has reached the Cirrus team.</p>
-      <p class="note">Cirrus keeps your answers, any recordings or files, and your name and email if you added them, for 2 years. Only the Cirrus team sees them, to improve the product.</p>
+      <p class="note">Cirrus keeps your answers, any recordings or files, and your name and email if you added them, for 6 months, then deletes them. Only the Cirrus team sees them, to improve the product. To have them deleted sooner, contact the Cirrus Service Desk.</p>
     </div>
   </main>
 
@@ -328,7 +328,7 @@ footer{margin-top:48px;font-size:13px;color:var(--muted);}
       $('notYou').hidden = false;
       if (N) $('sentTo').textContent = 'This link was sent to ' + N + '. Not ' + N + '?';
       document.querySelectorAll('.note').forEach(function (n) {
-        n.textContent = 'Cirrus keeps your answers and any recordings or files, with the name and email this link was sent to, for 2 years. Only the Cirrus team sees them, to improve the product.';
+        n.textContent = 'Cirrus keeps your answers and any recordings or files, with the name and email this link was sent to, for 6 months, then deletes them. Only the Cirrus team sees them, to improve the product. To have them deleted sooner, contact the Cirrus Service Desk.';
       });
     }
 
